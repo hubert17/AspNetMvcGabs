@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Your WebApp</h1>
+    <p class="lead">Your app short description.</p>
+    <p><a href="/home/about" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>ASP.NET Identity</h2>
+        <p>
+            <dl>
+                <dd>To get the current login user</dd><dt>User.Identity.Name</dt>
+                <hr />
+                <dd>To check if user is authenticated</dd><dt>if(Request.IsAuthenticated)</dt>
+                <hr />
+                <dd>To check if user belong to role</dd><dt>if(User.IsInRole("admin"))</dt>
+                <hr />
+                <dd>Restrict access to a controller or action</dd><dt>Add [Authorize] attribute right above the controller or action</dt>
+                <hr />
+                <dd>Allow anonymous access to action</dd><dt>Put [AllowAnonymous] attribute right above the action</dt>
+                <hr />
+                <dd>Restrict access by specific role</dd><dt>Add [Authorize(Roles = @@"admin")] attribute right above the controller or action</dt>
+            </dl>
+        </p>
+
+        <p><a class="btn btn-default" href="https://www.codeproject.com/Articles/762428/ASP-NET-MVC-and-Identity-Understanding-the-Basics">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Content Here</h2>
+        <p>Lorem ipsum dolor sit amet, his unum indoctum aliquando eu, ne prima moderatius efficiendi mei. Ex aperiam copiosae has. Aliquam imperdiet has in, delenit graecis iracundia ex sed, ne nec vide affert tincidunt. Erant possim atomorum nec et.</p>
+        <p><a class="btn btn-default" href="#">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>More Content Here</h2>
+        <p>Lorem ipsum dolor sit amet, his unum indoctum aliquando eu, ne prima moderatius efficiendi mei. Ex aperiam copiosae has. Aliquam imperdiet has in, delenit graecis iracundia ex sed, ne nec vide affert tincidunt. Erant possim atomorum nec et.</p>
+        <p><a class="btn btn-default" href="#">Learn more &raquo;</a></p>
+    </div>
+</div>
