@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace MyAspNetMvcApp.Models
 {
@@ -11,12 +12,6 @@ namespace MyAspNetMvcApp.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime Deadline { get; set; }
-
-        public static string getProjectName(int Id)
-        {
-            var db = new ApplicationDbContext();
-            return db.Projects.Find(Id).Name;
-        }
     }
    
 }

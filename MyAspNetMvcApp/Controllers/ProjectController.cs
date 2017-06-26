@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyAspNetMvcApp.Models;
+using MyAspNetMvcApp.ViewModels;
 
 namespace MyAspNetMvcApp.Controllers
 {
@@ -19,12 +20,7 @@ namespace MyAspNetMvcApp.Controllers
 
         public ActionResult Submit()
         {
-            ViewBag.ProjectDropDown = db.Projects.Select(i => new SelectListItem()
-            {
-                Text = i.Name,
-                Value = i.Id.ToString()
-            });
-
+            ViewBag.ProjectDropDown = ProjectViewModel.getSelectList();
             ViewBag.submissions = db.Submissions.OrderBy(x=>x.ProjectId).ThenBy(y=>y.SubmitDate).ToList();
             
             return View();
@@ -33,9 +29,12 @@ namespace MyAspNetMvcApp.Controllers
         [HttpPost]
         public ActionResult Submit(Submission s)
         {
-            s.SubmitDate = DateTime.Now;
-            db.Submissions.Add(s);
-            db.SaveChanges();
+            if(!string.IsNullOrEmpty(s.LastName) && !string.IsNullOrEmpty(s.Link))
+            {
+                s.SubmitDate = DateTime.Now;
+                db.Submissions.Add(s);
+                db.SaveChanges();
+            }
             return RedirectToAction("Submit");
         }
 
