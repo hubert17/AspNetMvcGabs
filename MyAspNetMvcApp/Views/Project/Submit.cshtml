@@ -121,26 +121,25 @@
 
 
 
-@{
-    Random rnd = new Random();
-    int bgsound = rnd.Next(1, 3);
-}
-<audio name="media" id="media" class="hidden">
-    @if (bgsound == 1)
-    {
-        <source src="https://doc-08-70-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/c5l3r6il0qoa5jkhlgatmdbpc07o09kq/1498456800000/16299828045820479445/*/0B3AiL_dVvs60OHgxeFd2T2lxaVE" type="audio/webm">
-    }
-    else
-    {
-        <source src="https://doc-08-2g-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/282doqgedqbba686e1ta8k7u4oqdd6iq/1498456800000/09204503705101265878/*/0B3X1Q6djB-DIdXNpUFM3NmdGMkU" type="audio/webm">
-    }    
-</audio>
-
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
+
+    @{
+        Random rnd = new Random();
+        int bgsound = rnd.Next(1, 3);
+    }
+    <audio name="media" id="media" class="hidden">
+        @if (bgsound == 1)
+        {
+            <source src="https://doc-08-70-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/c5l3r6il0qoa5jkhlgatmdbpc07o09kq/1498456800000/16299828045820479445/*/0B3AiL_dVvs60OHgxeFd2T2lxaVE" type="audio/webm">
+        }
+        else
+        {
+            <source src="https://doc-08-2g-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/282doqgedqbba686e1ta8k7u4oqdd6iq/1498456800000/09204503705101265878/*/0B3X1Q6djB-DIdXNpUFM3NmdGMkU" type="audio/webm">
+        }
+    </audio>
     <script>
         $(document).ready(function () {
             var audio = $('#media').get(0);
