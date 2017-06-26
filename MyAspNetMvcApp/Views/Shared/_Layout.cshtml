@@ -3,7 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <meta property="og:title" content="AspNetMvcGabs" />
+    <meta property="og:url" content="http://aspnetmvcgabs.azurewebsites.net" />
+    <meta property="og:description" content="Advance Web Development Portal of PHINMA-COC IT Students." />
+    <title>@ViewBag.Title - AspNetMvcGabs</title>
     
     @if(TempData["Message"] != null)
     {
@@ -25,13 +28,46 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("AspNetMvcGabs", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">WebApps <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">Advance Web-1</li>
+                            <li><a href="#">Hello</a></li>
+                            <li><a href="#">Madam Kapalaran</a></li>
+                            <li><a href="#">Next Activity</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Advance Web-2</li>
+                            <li><a href="#">Coming soon</a></li>
+                            <li><a href="#">More apps</a></li>
+                        </ul>
+                    </li>
+                    @if (Request.IsAuthenticated && (User.IsInRole("admin") || (User.Identity.Name == "owner")))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("CreateProject","Project")">Create</a></li>
+                                <li><a href="@Url.Action("Index","Project")">Submit</a></li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li><a href="@Url.Action("Index","Project")">Submit Project</a></li>
+                    }
+
                     @if (Request.IsAuthenticated && (User.IsInRole("admin") || (User.Identity.Name == "owner") ))
                     {
                         <li>@Html.ActionLink("User Roles", "Index", "Roles")</li>
@@ -50,7 +86,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Bernard S. Gabon</p>
         </footer>
     </div>
 

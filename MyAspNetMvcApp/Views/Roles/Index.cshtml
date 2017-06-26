@@ -98,13 +98,21 @@
                                 <ul>
                                     @foreach (var roles in userRoles[user.Id])
                                     {
+                                        string warning = string.Empty;
                                         <li>
                                             <form action="/roles/DeleteRoleForUser/" method="post">
                                                 @Html.AntiForgeryToken()
                                                 @Html.ValidationSummary(true)
                                                 <input type="hidden" name="UserName" id="UserName" value="@user.UserName" />
                                                 <input type="hidden" name="RoleName" id="RoleName" value="@roles" />
-                                                @roles <button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+                                                @if (roles == "admin" && user.UserName == User.Identity.Name)
+                                                {
+                                                    @roles <button type="submit" class="btn btn-danger btn-xs" onClick="return confirm('Warning: You are about to remove yourself from the admin group. Continue?')"><span class="glyphicon glyphicon-remove" ></span></button>
+                                                }
+                                                else
+                                                {
+                                                    @roles <button type="submit" class="btn btn-danger btn-xs" ><span class="glyphicon glyphicon-remove" ></span></button>
+                                                }
                                             </form>
                                         </li>
                                     }
