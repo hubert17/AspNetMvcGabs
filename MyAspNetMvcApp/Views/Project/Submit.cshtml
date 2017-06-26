@@ -125,7 +125,7 @@
     Random rnd = new Random();
     int bgsound = rnd.Next(1, 3);
 }
-<audio name="media" id="media" autoplay class="hidden">
+<audio name="media" id="media" class="hidden">
     @if (bgsound == 1)
     {
         <source src="https://doc-08-70-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/c5l3r6il0qoa5jkhlgatmdbpc07o09kq/1498456800000/16299828045820479445/*/0B3AiL_dVvs60OHgxeFd2T2lxaVE" type="audio/webm">
@@ -140,6 +140,14 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            var audio = $('#media').get(0);
+            //audio.load();
+            audio.play();
+        });
+    </script>
 }
 
 
