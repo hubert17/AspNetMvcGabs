@@ -6,7 +6,7 @@
     <meta property="og:title" content="AspNetMvcGabs" />
     <meta property="og:url" content="http://aspnetmvcgabs.azurewebsites.net" />
     <meta property="og:description" content="Advance Web Development Portal of PHINMA-COC IT Students." />
-    <title>@ViewBag.Title - AspNetMvcGabs</title>
+    <title>@ViewBag.Title - Bernard Gabon [dot] com</title>
     
     @if(TempData["Message"] != null)
     {
@@ -28,16 +28,26 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("AspNetMvcGabs", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("BernardGabon.com", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
+                    <li class="dropdown hidden">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("About", "About", "Home")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Facebook Groups <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="https://www.facebook.com/groups/aspnetmvcgabs/" target="_blank">Advance Web Development</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Under construction</li>
+                            <li><a href="#">Desktop Publishing</a></li>
+                            <li><a href="#">Audio and Video</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
