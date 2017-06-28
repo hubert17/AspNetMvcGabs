@@ -186,11 +186,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CsharpController.cs" />
     <Compile Include="Controllers\GeocitiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Progbasic3w1Controller.cs" />
@@ -342,6 +342,8 @@
     <Content Include="Views\Geocities\Page3.cshtml" />
     <Content Include="Views\Progbasic3w1\Index.cshtml" />
     <Content Include="Views\Progbasic3w1\Grade.cshtml" />
+    <Content Include="Views\Csharp\Index.cshtml" />
+    <Content Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

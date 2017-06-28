@@ -22,8 +22,8 @@ namespace MyAspNetMvcApp.Controllers
             var thirdGrade = Double.Parse(Request.Form["thirdGrade"]);
 
             double finalGrade = (firstGrade * 0.33) 
-                + (secondGrade * 100 / 0.33) 
-                + (thirdGrade * 100 / 0.34);
+                + (secondGrade * 0.33) 
+                + (thirdGrade * 0.34);
 
             ViewBag.name = name;
             ViewBag.finalGrade = finalGrade;
