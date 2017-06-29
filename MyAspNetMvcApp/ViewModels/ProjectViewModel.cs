@@ -13,6 +13,7 @@ namespace MyAspNetMvcApp.ViewModels
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime Deadline { get; set; }
+        public bool IsActive { get; set; }
 
         public static string getProjectNameById(int Id)
         {
@@ -23,7 +24,7 @@ namespace MyAspNetMvcApp.ViewModels
         public static SelectList getSelectList()
         {
             var db = new ApplicationDbContext();
-            var items = db.Projects.Select(i => new SelectListItem()
+            var items = db.Projects.Where(x=>x.IsActive != false).Select(i => new SelectListItem()
             {
                 Text = i.Name,
                 Value = i.Id.ToString()

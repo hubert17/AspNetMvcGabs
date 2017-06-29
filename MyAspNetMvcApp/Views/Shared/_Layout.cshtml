@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="AspNetMvcGabs" />
-    <meta property="og:url" content="http://aspnetmvcgabs.azurewebsites.net" />
-    <meta property="og:description" content="Advance Web Development Portal of PHINMA-COC IT Students." />
+    <meta property="og:title" content="BernardGabon.com" />
+    <meta property="og:url" content="http://www.bernardgabon.com" />
+    <meta property="og:description" content="Gabs portal for PHINMA-COC IT/Multimedia/Web students." />
     <title>@ViewBag.Title - Bernard Gabon [dot] com</title>
     
     @if(TempData["Message"] != null)
@@ -63,6 +63,9 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">WebApps <span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            <li><a href="https://github.com/hubert17/AspNetMvcGabs" target="_blank">Github Repository</a></li>
+                            <li><a href="@Url.Action("Livedemo", "Home")">Controller / Actions</a></li>
+                            <li role="separator" class="divider"></li>
                             <li class="dropdown-header">Advance Web-1</li>
                             <li><a href="#">Hello</a></li>
                             <li><a href="#">Madam Kapalaran</a></li>
@@ -86,7 +89,13 @@
                     }
                     else
                     {
-                        <li><a href="@Url.Action("Index","Project")">Submit Project</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Submit Project <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="http://bernardgabon.com/Project">via Azure server</a></li>
+                                <li><a href="http://somee.bernardgabon.com/Project">with Somee server</a></li>
+                            </ul>
+                        </li>
                     }
 
                     @if (Request.IsAuthenticated && (User.IsInRole("admin") || (User.Identity.Name == "owner") ))
@@ -102,7 +111,7 @@
         @if (ViewBag.ResultMessage != null)
         {
             <div class="alert alert-info">@ViewBag.ResultMessage</div>
-        }
+        }        
 
         @RenderBody()
         <hr />
@@ -124,5 +133,13 @@ else
     <script src="//ajax.aspnetcdn.com/ajax/respond/1.4.2/respond.min.js"></script>   
 }
     @RenderSection("scripts", required: false)
+
+    <script>
+        $(document).ready(function () {
+            $('#nextAll').nextAll().remove();
+        });
+    </script>
+    <hr id="nextAll" style="display:none;" />
 </body>
 </html>
+

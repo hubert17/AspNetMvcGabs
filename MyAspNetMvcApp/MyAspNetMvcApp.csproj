@@ -190,6 +190,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Activity2Controller.cs" />
     <Compile Include="Controllers\CsharpController.cs" />
     <Compile Include="Controllers\GeocitiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -200,6 +201,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AppControllerAction.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\Submission.cs" />
     <Compile Include="Models\UserProfile.cs" />
@@ -300,10 +302,13 @@
     </Content>
     <Content Include="Content\geo-bs-swatch\pages.zip" />
     <None Include="Properties\PublishProfiles\AspNetMvcGabs - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.dotanimation.custom.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.dotanimation.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -344,6 +349,10 @@
     <Content Include="Views\Progbasic3w1\Grade.cshtml" />
     <Content Include="Views\Csharp\Index.cshtml" />
     <Content Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <Content Include="Views\Shared\_SubmitAnimationScriptPartial.cshtml" />
+    <Content Include="Views\Activity2\Index.cshtml" />
+    <Content Include="Views\Activity2\Average.cshtml" />
+    <Content Include="Views\Home\Livedemo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
