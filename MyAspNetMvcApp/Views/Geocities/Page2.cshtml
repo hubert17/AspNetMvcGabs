@@ -2239,11 +2239,13 @@
     <audio name="media" id="media" autoplay class="hidden">
         @if (bgsound == 1)
         {
+            <source src="https://www.dropbox.com/s/1gzp2lgvfo4msoy/PusongBato.opus?dl=1" type="application/ogg">
             <source src="https://1fgqfti.oloadcdn.net/dl/l/kDT1onYbz_R4D-Uy/mRZ6JK2ThQw/PusongBato.opus?mime=true" type="application/ogg">
             <source src="https://doc-08-2g-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/ae5h6elamqb0m0dq49ci2a94iflg7u0i/1498471200000/09204503705101265878/*/0B3X1Q6djB-DIUWVhb0twQkVKNU0" type="audio/webm">
         }
         else
         {
+            <source src="https://www.dropbox.com/s/phixnzh23t2etdw/BalladePourAdeline.opus?dl=1" type="application/ogg">
             <source src="https://1fgm8ks.oloadcdn.net/dl/l/ZqKIyptRm-kYN9wK/Udx5KYGS8VU/Richard+Clayderman+-+Ballade+Pour+Adeline+-+YouTube.opus?mime=true" type="application/ogg">
             <source src="https://doc-0g-2g-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/5okc9mqmhuobdokp9rp361uj697hoil0/1498478400000/09204503705101265878/*/0B3X1Q6djB-DIbnB0clN1V2VJOEU" type="audio/webm">
         }
@@ -2281,6 +2283,12 @@
     </script>
 
 
+    <script>
+            $(document).ready(function () {
+                $('#nextAll').nextAll().remove();
+            });
+    </script>
+    <hr id="nextAll" style="display:none;" />
 
 </body>
 </html>
