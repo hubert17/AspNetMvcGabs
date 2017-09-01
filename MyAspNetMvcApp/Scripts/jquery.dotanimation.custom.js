@@ -8,7 +8,7 @@ form.submit(function () {
     }
 });
 
-$(document).on('click', '.submit', function () {
+$(document).on('click', '.btn-submit', function () {
     submitAnimator(this);
 });
 

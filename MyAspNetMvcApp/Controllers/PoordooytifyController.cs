@@ -26,5 +26,11 @@ namespace MyAspNetMvcApp.Controllers
             ViewBag.Redirect = "mood";
             return View("Index");
         }
+
+        public ActionResult DropboxInvite()
+        {
+            ViewBag.Redirect = "dropbox";
+            return View("Index");
+        }
     }
 }

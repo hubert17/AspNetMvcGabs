@@ -20,10 +20,12 @@
 x64/
 x86/
 bld/
-[Bb]in/
+# [Bb]in/
+[Rr]oslyn/
 [Oo]bj/
 [Ll]og/
 [Mm]edia/
+_Libs/
 
 # Visual Studio 2015 cache/options directory
 .vs/

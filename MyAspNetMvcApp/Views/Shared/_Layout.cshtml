@@ -8,18 +8,17 @@
     <meta property="og:description" content="Gabs portal for PHINMA-COC IT/Multimedia/Web students." />
     <title>@ViewBag.Title - Bernard Gabon [dot] com</title>
     
-    @if(TempData["Message"] != null)
+    @if(TempData["AlertMessage"] != null)
     {
         <script>
-            alert('@TempData["Message"]')
+            alert('@TempData["AlertMessage"]')
         </script>
     }
-
     @if (HttpContext.Current.Request.IsLocal)
     {
         <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet">
         <link href="@Url.Content("~/Content/site.css")" rel="stylesheet">
-        <script src="@Url.Content("~/Scripts/modernizr-2.6.2.js")"></script>
+        <script src="@Url.Content("~/Scripts/modernizr-2.8.3.js")"></script>
     }
     else
     {
@@ -119,9 +118,9 @@
         </div>
     </div>
     <div class="container body-content">
-        @if (ViewBag.ResultMessage != null)
+        @if (ViewBag.Message != null)
         {
-            <div class="alert alert-info">@ViewBag.ResultMessage</div>
+            <div class="alert alert-info">@ViewBag.Message</div>
         }        
 
         @RenderBody()
@@ -133,7 +132,7 @@
 
 @if (HttpContext.Current.Request.IsLocal)
 {
-    <script src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-3.1.1.min.js")"></script>
     <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
     <script src="@Url.Content("~/Scripts/respond.min.js")"></script>
 }

@@ -29,7 +29,7 @@ namespace MyAspNetMvcApp.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext() : base("DbConnSqlAzure")
+        public ApplicationDbContext() : base("DbConnJetAccess")
         {
         }
 
@@ -43,5 +43,7 @@ namespace MyAspNetMvcApp.Models
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Submission> Submissions { get; set; }
+
+        public DbSet<Book> Books { get; set; }
     }
 }

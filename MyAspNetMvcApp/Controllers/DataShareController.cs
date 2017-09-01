@@ -31,7 +31,7 @@ namespace MyAspNetMvcApp.Controllers
             }
             else
             {
-                int userCount = (int)HttpRuntime.Cache["UsersCount"];
+                userCount = (int)HttpRuntime.Cache["UsersCount"];
                 userCount++;
                 HttpRuntime.Cache["UsersCount"] = userCount;
             }
