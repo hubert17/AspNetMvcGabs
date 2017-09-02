@@ -13,6 +13,7 @@ namespace MyAspNetMvcApp
         protected void Application_Start()
         {
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }

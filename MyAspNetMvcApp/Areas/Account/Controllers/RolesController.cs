@@ -6,9 +6,10 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MyAspNetMvcApp.Models;
+using MyAspNetMvcApp.Areas.Account.Models;
 using System.Threading.Tasks;
 
-namespace MyAspNetMvcApp.Controllers
+namespace MyAspNetMvcApp.Areas.Account.Controllers
 {
     [Authorize(Roles = @"admin")]
     public class RolesController : Controller

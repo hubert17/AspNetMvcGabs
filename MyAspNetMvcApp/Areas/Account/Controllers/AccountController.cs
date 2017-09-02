@@ -9,9 +9,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using MyAspNetMvcApp.Models;
-using MyAspNetMvcApp.ViewModels;
+using MyAspNetMvcApp.Areas.Account.Models;
+using MyAspNetMvcApp.Areas.Account.ViewModels;
 
-namespace MyAspNetMvcApp.Controllers
+namespace MyAspNetMvcApp.Areas.Account.Controllers
 {
     [Authorize]
     public class AccountController : Controller
@@ -53,7 +54,10 @@ namespace MyAspNetMvcApp.Controllers
                     await UserManager.UpdateAsync(user);
 
                     await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
+                    if(string.IsNullOrEmpty(returnUrl))
+                        return RedirectToAction("index", "home", new { area = "" });
+                    else
+                        return RedirectToLocal(returnUrl);
                 }
                 else
                 {

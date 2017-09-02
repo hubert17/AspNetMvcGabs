@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace MyAspNetMvcApp.Models
+namespace MyAspNetMvcApp.Areas.Account.Models
 {
     public class UserProfile
     {

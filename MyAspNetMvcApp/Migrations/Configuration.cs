@@ -3,6 +3,7 @@ namespace MyAspNetMvcApp.Migrations
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using MyAspNetMvcApp.Models;
+    using MyAspNetMvcApp.Areas.Account.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace MyAspNetMvcApp.ViewModels
+namespace MyAspNetMvcApp.Areas.Account.ViewModels
 {
 
     public class ManageUserViewModel
