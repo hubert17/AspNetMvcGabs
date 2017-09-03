@@ -204,6 +204,7 @@
     <Compile Include="Controllers\CsharpController.cs" />
     <Compile Include="Controllers\DataShareController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\GeocitiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Lesson4Controller.cs" />
@@ -224,6 +225,7 @@
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\ChatMessage.cs" />
     <Compile Include="Models\Chatmvc.cs" />
+    <Compile Include="Models\Email.cs" />
     <Compile Include="Models\Lessons\Grade.cs" />
     <Compile Include="Models\Lessons\Song.cs" />
     <Compile Include="Models\Movie.cs" />
@@ -431,6 +433,7 @@
     <Content Include="Views\Book3\Delete.cshtml" />
     <Content Include="Views\Book3\Edit.cshtml" />
     <Content Include="Views\Book3\Index.cshtml" />
+    <Content Include="Views\Email\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />
