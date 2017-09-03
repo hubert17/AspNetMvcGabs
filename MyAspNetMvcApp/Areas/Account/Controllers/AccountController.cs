@@ -47,6 +47,15 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
         {
             if (ModelState.IsValid)
             {
+                using (var db = new ApplicationDbContext())
+                {
+                    string myPhone = String.Join("", model.UserName.Split('(', '-', ')')).TrimStart('0');
+                    ApplicationUser myUser = db.Users.FirstOrDefault(u => u.UserName == model.UserName || (u.PhoneNumber == myPhone ));
+                    if (myUser != null)
+                    {
+                        model.UserName = myUser.UserName;
+                    }
+                }
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null && user.UserProfile.InActive == false)
                 {
@@ -89,6 +98,7 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
                 var user = new ApplicationUser()
                 {
                     UserName = model.UserName,
+                    PhoneNumber = string.IsNullOrEmpty(model.PhoneNumber) ? null : model.PhoneNumber.TrimStart('0'),
                     UserProfile = new UserProfile
                     {
                         UserName = model.UserName,
@@ -103,7 +113,7 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home", new { area = "", welcome = true });
                 }
                 else
                 {
@@ -113,6 +123,45 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        // Check existing email/phone number
+        [AllowAnonymous]
+        public ActionResult CheckExistingEmail(string UserName)
+        {
+            bool ifExist = false;
+            try
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    ApplicationUser myUser = db.Users.FirstOrDefault(u => u.UserName == UserName);
+                    if (myUser != null) ifExist = true;
+                }
+                return Json(!ifExist, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+        [AllowAnonymous]
+        public ActionResult CheckExistingPhoneNumber(string PhoneNumber)
+        {
+            bool ifExist = false;
+            try
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    PhoneNumber = PhoneNumber.TrimStart('0');
+                    ApplicationUser myUser = db.Users.FirstOrDefault(u => u.PhoneNumber == PhoneNumber);
+                    if (myUser != null) ifExist = true;
+                }
+                return Json(!ifExist, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
         }
 
         //
@@ -181,6 +230,71 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
+        public string ForgotPassword(string id = "", string email = "")
+        {            
+            using (var db = new ApplicationDbContext())
+            {
+                var user = UserManager.FindByName(email);
+
+                if (user != null) // && user.EmailConfirmed
+                {
+                    char[] padding = { '=' };
+                    //user.PasswordResetCode = Convert.ToBase64String(Guid.NewGuid().ToByteArray()).TrimEnd(padding).Replace('+', '-').Replace('/', '_');
+                    var code = UserManager.GeneratePasswordResetToken(user.Id);
+                    var result = UserManager.Update(user);
+                    if(result.Succeeded)
+                    {
+                        //string url = Request.Url.GetLeftPart(UriPartial.Authority) + Url.Action("ResetPassword", "Account", new { area = "Account", code = code, email = user.UserName });
+                        var callbackUrl = Request.Url.GetLeftPart(UriPartial.Authority) + Url.Action("ResetPassword", "Account", new { UserId = user.Id, code = code });
+                        string msg = "To change your password, <a href=\"" + callbackUrl + "\">click here</a>.<br>";
+                        msg += "If you have not requested a password change for your account, please ignore this email.";
+
+                        Gabs.Helpers.EmailUtil.SendEmail(user.Email, "Password Reset", msg);
+
+                        return "1";
+                    }
+                }
+            }
+
+            return "0";
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<ActionResult> ResetPassword(string code, string UserId)
+        {
+            var user = await UserManager.FindByIdAsync(UserId);
+            if (user != null)
+            {
+                var rp = new ChangePasswordViewModel();
+                rp.Email = user.Email;
+                rp.Code = code;
+                return View(rp);
+            }
+            else
+                return RedirectToAction("Index", "Home", new { area = "" });
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<ActionResult> ResetPassword(ChangePasswordViewModel model)
+        {
+            ApplicationUser user = await UserManager.FindByNameAsync(model.Email);
+            if (user != null && user.PasswordResetCode == model.Code)
+            {
+                user.PasswordHash = UserManager.PasswordHasher.HashPassword(model.NewPassword);
+                var result = await UserManager.UpdateAsync(user);
+                if (!result.Succeeded)
+                {
+                    ViewBag.Failed = true;
+                    return View();
+                }
+            }
+            return RedirectToAction("Login", "Account");
+        }
+
+
         //
         // POST: /Account/LogOff
         [HttpPost]
@@ -188,7 +302,7 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         protected override void Dispose(bool disposing)
@@ -256,7 +370,7 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home", new { area = "" });
             }
         }
 

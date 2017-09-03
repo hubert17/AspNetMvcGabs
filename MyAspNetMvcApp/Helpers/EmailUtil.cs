@@ -14,12 +14,13 @@ namespace Gabs.Helpers
 {
     public class EmailUtil
     {
-        private const string ACCOUNT_EMAIL = "yuberto.gabon@gmail.com";
+        private const string ACCOUNT_EMAIL = "username@gmail.com";
         private const string ACCOUNT_PASSWORD = "my_password";
         private const string SMTP_HOST = "smtp.gmail.com"; // smtp-mail.outlook.com, smtp.mail.yahoo.com
         private const int SMTP_PORT = 587;
         private const bool REQUIRE_SSL = true;
         private const bool IS_HTML = true;
+        private const string SUBJECT_LABEL = "[AppName]";
 
         public static bool SendEmail(IEnumerable<string> mailTos, string subject, string body, EmailAttachment attachment = null, string attachmentFile = "", string mailCc = "", string mailBc = "", string mailReplyTo = "")
         {
@@ -42,7 +43,7 @@ namespace Gabs.Helpers
             if (!String.IsNullOrEmpty(mailCc)) mail.CC.Add(mailCc);
             if (!String.IsNullOrEmpty(mailBc)) mail.Bcc.Add(mailBc);
             if (!String.IsNullOrEmpty(mailReplyTo)) mail.ReplyToList.Add(mailReplyTo);
-            mail.Subject = subject;
+            mail.Subject = SUBJECT_LABEL + " " + subject;
             mail.IsBodyHtml = IS_HTML;
             mail.Body = body;
 

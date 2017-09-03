@@ -12,6 +12,7 @@ namespace MyAspNetMvcApp.Areas.Account.Models
         public string UserName { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
+        public string MobilePhone { get; set; }
         public string AltEmail { get; set; }
 
         public DateTime? LastLogin { get; set; }

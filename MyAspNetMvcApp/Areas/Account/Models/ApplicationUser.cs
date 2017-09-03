@@ -25,6 +25,7 @@ namespace MyAspNetMvcApp.Areas.Account.Models
             set { _userNameEmailBackingField = value; }
         }
 
+        public string PasswordResetCode { get; set; }
         public virtual UserProfile UserProfile { get; set; }
     }
 }
