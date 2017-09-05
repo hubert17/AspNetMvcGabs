@@ -33,47 +33,49 @@
                 </div>
             }
 
-                <form action="@Url.Action("Login", "Account", new { @ReturnUrl = ViewBag.ReturnUrl })" method="post" class="form-horizontal" role="form">
-                    @Html.AntiForgeryToken()
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Email or Phone Number", autofocus = "autofocus" })
-                    </div>
-                    <p>
-                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
-                    </p>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
-                    </div>
-                    <p>
-                        @Html.ValidationMessageFor(m => m.Password,"", new { @class = "text-danger" })
-                    </p>
-                    <div class="input-group">
-                        <div class="checkbox">
-                            <label>
-                                @Html.CheckBoxFor(m => m.RememberMe) Remember me
-                            </label>
+                <div class="col-md-10 col-md-offset-1">
+                    <form action="@Url.Action("Login", "Account", new { @ReturnUrl = ViewBag.ReturnUrl })" method="post" class="form-horizontal" role="form">
+                        @Html.AntiForgeryToken()
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Email or Mobile Number", autofocus = "autofocus" })
                         </div>
-                    </div>
-
-                    <div style="margin-top:10px" class="form-group">
-                        <!-- Button -->
-                        <div class="col-sm-12 controls">
-                            <input type="submit" value="Log in" class="btn btn-primary submit" />
+                        <p>
+                            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                        </p>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-12 control">
-                            <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
-                                Don't have an account? <a href="@Url.Action("Register", "Account", new { Area = "Account" })">Sign Up Here</a>
+                        <p>
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </p>
+                        <div class="input-group">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.CheckBoxFor(m => m.RememberMe) Remember me
+                                </label>
                             </div>
                         </div>
-                    </div>
 
-                </form>
+                        <div style="margin-top:10px" class="form-group">
+                            <!-- Button -->
+                            <div class="col-sm-12 controls">
+                                <input type="submit" value="Log in" class="btn btn-primary submit" />
+                            </div>
+                        </div>
 
+                        <div class="form-group">
+                            <div class="col-md-12 control">
+                                <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                                    Don't have an account? <a href="@Url.Action("Register", "Account", new { Area = "Account" })">Sign up here</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
             </div>
         </div>
     </div>
@@ -88,20 +90,22 @@
             <div class="panel-body">
                 <div id="forgotalert" class="alert alert-warning hidden" style="font-style:italic;">
                 </div>
-
-                <div id="forgotform" class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label for="email" class="col-md-3 control-label">Email</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" id="fpemail" name="fpemail" placeholder="Enter your email address">
+                <div class="col-md-10">
+                    <div id="forgotform" class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="email" class="col-md-3 control-label">Email</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="fpemail" name="fpemail" placeholder="Enter your email address">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <!-- Button -->
-                        <div class="col-md-offset-3 col-md-9">
-                            <button id="btn-forgot" type="button" class="btn btn-info"><i class="icon-hand-right"></i>Submit</button>
+                        <div class="form-group">
+                            <!-- Button -->
+                            <div class="col-md-offset-3 col-md-9">
+                                <button id="btn-forgot" type="button" class="btn btn-info"><i class="icon-hand-right"></i>Submit</button>
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
@@ -131,10 +135,13 @@
 
         $(document).ready(function () {
             $("#btn-forgot").click(function () {
+                var email = $('#fpemail').val();
+                if (!email) {
+                    return;
+                }
                 $(this).attr('disabled', true);
                 $(this).html('Requesting...');
                 var value;
-                var email = $('#fpemail').val();
                 $.ajax({
                     type: "POST",
                     url: '@Url.Action("ForgotPassword","Account")?email=' + email,

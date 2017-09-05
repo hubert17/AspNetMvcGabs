@@ -219,6 +219,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AppSettings.cs" />
     <Compile Include="Helpers\EmailUtil.cs" />
     <Compile Include="Helpers\ImageUploadUtil.cs" />
     <Compile Include="Migrations\Configuration.cs" />
