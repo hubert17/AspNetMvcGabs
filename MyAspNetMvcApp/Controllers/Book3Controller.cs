@@ -18,6 +18,13 @@ namespace MyAspNetMvcApp.Controllers
             //List<Book> books = (from book in db.Books select book).ToList();
             var books = db.Books.ToList();
 
+            if (TempData.Keys.Count <= 0)
+            {
+                ViewBag.MessageBox = "Welcome to Book app!";
+                ViewBag.MessagePanel = "Welcome to Book app!";
+                ViewBag.MessageAlert = "Welcome to Book app!";
+            }
+
             return View(books);
 
         }
@@ -36,7 +43,7 @@ namespace MyAspNetMvcApp.Controllers
             db.Books.Add(book);
             db.SaveChanges();
 
-            ViewBag.message = book.Title + " has been successfully added.";
+            TempData["MessagePanel"] = book.Title + " has been successfully added.";
             return View();
         }
 
@@ -45,7 +52,6 @@ namespace MyAspNetMvcApp.Controllers
         {
             var book = db.Books.Find(id);
             return View(book);
-
         }
         
         [HttpPost]
@@ -53,6 +59,7 @@ namespace MyAspNetMvcApp.Controllers
         {
             db.Entry(book).State = EntityState.Modified;
             db.SaveChanges();
+            TempData["MessageBox"] = book.Title + " has been updated.";
             return RedirectToAction("Index", "Book3");
 
         }
@@ -61,6 +68,7 @@ namespace MyAspNetMvcApp.Controllers
         public ActionResult Delete(int Id)
         {
             var book = db.Books.Find(Id);
+            TempData["MessageAlert"] = book.Title + " has been deleted.";
             db.Books.Remove(book);
             db.SaveChanges();
             return RedirectToAction("Index", "Book3");
