@@ -59,7 +59,7 @@ namespace MyAspNetMvcApp.Areas.Account.ViewModels
 
         [StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 10)]
         [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Mobile Number")]
+        [Display(Name = "Phone")]
         [System.Web.Mvc.Remote("CheckExistingPhoneNumber", "Account", ErrorMessage = "Phone number already exists")]
         public string PhoneNumber { get; set; }
 
