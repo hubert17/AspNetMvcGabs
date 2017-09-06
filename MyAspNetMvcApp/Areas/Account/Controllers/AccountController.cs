@@ -11,6 +11,8 @@ using Microsoft.Owin.Security;
 using MyAspNetMvcApp.Models;
 using MyAspNetMvcApp.Areas.Account.Models;
 using MyAspNetMvcApp.Areas.Account.ViewModels;
+using Microsoft.Owin.Security.DataProtection;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace MyAspNetMvcApp.Areas.Account.Controllers
 {
@@ -99,6 +101,7 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
                 {
                     UserName = model.UserName,
                     PhoneNumber = string.IsNullOrEmpty(model.PhoneNumber) ? null : model.PhoneNumber.TrimStart('0'),
+                    CountyCode =  string.IsNullOrEmpty(model.PhoneNumber) ? null : model.CountyCode,
                     UserProfile = new UserProfile
                     {
                         UserName = model.UserName,
@@ -108,11 +111,37 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
                         InActive = false
                     }
                 };
+                if(AppSettings.EmailVerificationEnabled)
+                {
+                    char[] padding = { '=' };
+                    user.Token = Convert.ToBase64String(Guid.NewGuid().ToByteArray()).TrimEnd(padding).Replace('+', '-').Replace('/', '_');
+                    user.TokenExpiration = DateTime.Now.AddHours(1);
+                }
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    string WelcomeMsg = "Hello " + model.FirstName + "! Welcome to " + AppSettings.AppTitle + ". "; ;
+                    if(AppSettings.EmailVerificationEnabled)
+                    {
+                        var callbackUrl = Request.Url.GetLeftPart(UriPartial.Authority) + Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = user.Token });
+                        Gabs.Helpers.EmailUtil.SendEmail(user.Email,
+                           "Confirm Your Account",
+                           "Hello " + model.FirstName +"!<br><br> Please confirm your account by clicking this <a href=\"" + callbackUrl + "\">link</a>.");
+                        WelcomeMsg += "Kindly check your email to verify your account.";
+                    }
+
                     await SignInAsync(user, isPersistent: false);
+
+                    if (!string.IsNullOrEmpty(model.PhoneNumber))
+                    {
+                        var smsMsg = "Hello " + model.FirstName + "! You can now login to " + AppSettings.AppTitle + " using your mobile number.";
+                        Gabs.Helpers.SMSUtil.Send("+" + model.CountyCode + model.PhoneNumber, smsMsg);
+                        WelcomeMsg += " We have also sent a welcome message to your mobile phone.";
+                        //return RedirectToAction("VerifyPhoneNumber", "Account");                       
+                    }
+
+                    TempData["MessageBox"] = WelcomeMsg;
                     return RedirectToAction("Index", "Home", new { area = "", welcome = true });
                 }
                 else
@@ -124,6 +153,45 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+        [AllowAnonymous]
+        public ActionResult ConfirmEmail(string userId, string code)
+        {
+            if (userId == null || code == null)
+            {
+                TempData["MessageAlert"] = "An error has occured.";
+                return RedirectToAction("index", "home", new { area = "" });
+            }
+
+            var user = UserManager.FindById(userId);            
+            if (user != null && user.TokenExpiration > DateTime.Now && !string.IsNullOrEmpty(user.Token) && user.Token.Equals(code))
+            {
+                user.EmailConfirmed = true;
+                user.Token = null;
+                user.TokenExpiration = null;
+                UserManager.Update(user);
+                TempData["MessageBox"] = "We have successfully verified your email.";
+                return RedirectToAction("Login", "Account");
+            }
+
+            TempData["MessagePanel"] = "Sorry. Your email confirmation token has expired.";
+            return RedirectToAction("index", "home", new { area = "" });
+        }
+
+        //[HttpGet]
+        //[AllowAnonymous]
+        //public ActionResult VerifyPhoneNumber()
+        //{
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
+        //{
+
+        //}
 
         // Check existing email/phone number
         [AllowAnonymous]
@@ -183,7 +251,7 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
         // POST: /Account/Manage
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Manage(ManageUserViewModel model)
+        public async Task<ActionResult> Manage(ChangePasswordViewModel model)
         {
             bool hasPassword = HasPassword();
             ViewBag.HasLocalPassword = hasPassword;
@@ -232,28 +300,23 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
 
         [AllowAnonymous]
         public string ForgotPassword(string id = "", string email = "")
-        {            
-            using (var db = new ApplicationDbContext())
+        {
+            var user = UserManager.FindByName(email);
+            if (user != null && user.EmailConfirmed)
             {
-                var user = UserManager.FindByName(email);
-
-                if (user != null) // && user.EmailConfirmed
+                char[] padding = { '=' };
+                user.Token = Convert.ToBase64String(Guid.NewGuid().ToByteArray()).TrimEnd(padding).Replace('+', '-').Replace('/', '_');
+                user.TokenExpiration = DateTime.Now.AddHours(1);
+                var result = UserManager.Update(user);
+                if (result.Succeeded)
                 {
-                    char[] padding = { '=' };
-                    //user.PasswordResetCode = Convert.ToBase64String(Guid.NewGuid().ToByteArray()).TrimEnd(padding).Replace('+', '-').Replace('/', '_');
-                    var code = UserManager.GeneratePasswordResetToken(user.Id);
-                    var result = UserManager.Update(user);
-                    if(result.Succeeded)
-                    {
-                        //string url = Request.Url.GetLeftPart(UriPartial.Authority) + Url.Action("ResetPassword", "Account", new { area = "Account", code = code, email = user.UserName });
-                        var callbackUrl = Request.Url.GetLeftPart(UriPartial.Authority) + Url.Action("ResetPassword", "Account", new { UserId = user.Id, code = code });
-                        string msg = "To change your password, <a href=\"" + callbackUrl + "\">click here</a>.<br>";
-                        msg += "If you have not requested a password change for your account, please ignore this email.";
+                    var callbackUrl = Request.Url.GetLeftPart(UriPartial.Authority) + Url.Action("ResetPassword", "Account", new { UserId = user.Id, code = user.Token });
+                    string msg = "To reset your password, <a href=\"" + callbackUrl + "\">click here</a>.<br>";
+                    msg += "If you have not requested a password change for your account, please ignore this email.";
 
-                        Gabs.Helpers.EmailUtil.SendEmail(user.Email, "Password Reset", msg);
+                    Gabs.Helpers.EmailUtil.SendEmail(user.Email, "Password Reset", msg);
 
-                        return "1";
-                    }
+                    return "1";
                 }
             }
 
@@ -265,32 +328,42 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
         public async Task<ActionResult> ResetPassword(string code, string UserId)
         {
             var user = await UserManager.FindByIdAsync(UserId);
-            if (user != null)
+            if (user != null && user.TokenExpiration > DateTime.Now && !string.IsNullOrEmpty(user.Token) && user.Token.Equals(code))
             {
-                var rp = new ChangePasswordViewModel();
+                var rp = new ResetPasswordViewModel();
                 rp.Email = user.Email;
                 rp.Code = code;
                 return View(rp);
             }
-            else
-                return RedirectToAction("Index", "Home", new { area = "" });
+            else if (user != null)
+            {
+                user.Token = null;
+                user.TokenExpiration = null;
+                await UserManager.UpdateAsync(user);
+            }
+
+            TempData["MessagePanel"] = "Sorry. Your password reset token has expired.";
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<ActionResult> ResetPassword(ChangePasswordViewModel model)
+        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
             ApplicationUser user = await UserManager.FindByNameAsync(model.Email);
-            if (user != null && user.PasswordResetCode == model.Code)
+            if (user!=null && user.TokenExpiration > DateTime.Now)
             {
                 user.PasswordHash = UserManager.PasswordHasher.HashPassword(model.NewPassword);
+                user.Token = null;
+                user.TokenExpiration = null;
                 var result = await UserManager.UpdateAsync(user);
                 if (!result.Succeeded)
                 {
-                    ViewBag.Failed = true;
-                    return View();
+                    TempData["MessageAlert"] = "Password reset failed.";
+                    return RedirectToAction("Index", "Home", new { area = "" });
                 }
             }
+            TempData["MessageBox"] = "You may now login with your new password.";
             return RedirectToAction("Login", "Account");
         }
 

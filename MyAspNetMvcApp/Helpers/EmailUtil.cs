@@ -8,21 +8,21 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
-using System.Web;
 
 namespace Gabs.Helpers
 {
-    public class EmailUtil
+    public static class EmailUtil
     {
         private const string ACCOUNT_EMAIL = "username@gmail.com";
         private const string ACCOUNT_PASSWORD = "my_password";
         private const string SMTP_HOST = "smtp.gmail.com"; // smtp-mail.outlook.com, smtp.mail.yahoo.com
         private const int SMTP_PORT = 587;
         private const bool REQUIRE_SSL = true;
+        private const char MULTI_MAILTO_SEPARATOR = ';'; // semi-colon or comma
         private const bool IS_HTML = true;
-        private const string SUBJECT_LABEL = "[AppName]";
+        private static string SUBJECT_LABEL = "[" + MyAspNetMvcApp.AppSettings.AppTitle + "]";
 
-        public static bool SendEmail(IEnumerable<string> mailTos, string subject, string body, EmailAttachment attachment = null, string attachmentFile = "", string mailCc = "", string mailBc = "", string mailReplyTo = "")
+        public static bool SendEmail(string mailTo, string subject, string body, EmailAttachment attachment = null, string attachmentFile = "", string mailCc = "", string mailBc = "", string mailReplyTo = "")
         {
             SmtpClient smtp = new SmtpClient()
             {
@@ -36,9 +36,10 @@ namespace Gabs.Helpers
 
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress(ACCOUNT_EMAIL);
-            foreach(var mailTo in mailTos)
+            List<string> mailTos = mailTo.Split(MULTI_MAILTO_SEPARATOR).ToList();
+            foreach (var mailto in mailTos)
             {
-                mail.To.Add(mailTo);
+                mail.To.Add(mailto);
             }
             if (!String.IsNullOrEmpty(mailCc)) mail.CC.Add(mailCc);
             if (!String.IsNullOrEmpty(mailBc)) mail.Bcc.Add(mailBc);
@@ -70,11 +71,6 @@ namespace Gabs.Helpers
             {
                 return false;
             }
-        }
-
-        public static bool SendEmail(string mailTo, string subject, string body, EmailAttachment attachment = null, string attachmentFile = "", string mailCc = "", string mailBc = "", string mailReplyTo = "")
-        {
-            return SendEmail(new List<string> { mailTo }, subject, body, attachment, attachmentFile, mailCc, mailBc, mailReplyTo);
         }
 
         public static EmailAttachment FileToAttachment(System.Web.HttpPostedFileBase File)

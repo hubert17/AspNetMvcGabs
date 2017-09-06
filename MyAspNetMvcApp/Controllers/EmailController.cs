@@ -19,9 +19,18 @@ namespace MyAspNetMvcApp.Controllers
         public ActionResult Send(Email mail, HttpPostedFileBase Attachment)
         {
             var attachment = Gabs.Helpers.EmailUtil.FileToAttachment(Attachment);
-            TempData["msg"] = Gabs.Helpers.EmailUtil.SendEmail(mail.MailTo, mail.Subject, mail.Message, attachment);
+            TempData["MessagePanel"] = Gabs.Helpers.EmailUtil.SendEmail(mail.MailTo, mail.Subject, mail.Message, attachment);
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult SendSMS(Email mail)
+        {            
+            TempData["MessagePanel"] = Gabs.Helpers.SMSUtil.Send(mail.MailTo, mail.Message);
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

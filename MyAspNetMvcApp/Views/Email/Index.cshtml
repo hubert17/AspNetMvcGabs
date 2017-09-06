@@ -35,3 +35,10 @@
 </form>
 
 
+<h2>Send Email</h2>
+<form action="@Url.Action("SendSMS","Email")" method="post">
+    <input type="text" name="@nameof(Model.MailTo)" placeholder="To" /><br />
+    <textarea name="@nameof(Model.Message)" rows="3" placeholder="Message">
+    @Gabs.Helpers.SMSUtil.GenerateCode(Request.QueryString["m"])</textarea><br />
+    <button type="submit">Send</button>
+</form>

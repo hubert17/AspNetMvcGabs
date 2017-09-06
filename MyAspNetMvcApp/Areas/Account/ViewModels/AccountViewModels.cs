@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace MyAspNetMvcApp.Areas.Account.ViewModels
 {
 
-    public class ManageUserViewModel
+    public class ChangePasswordViewModel
     {
         [Required]
         [DataType(DataType.Password)]
@@ -59,9 +59,11 @@ namespace MyAspNetMvcApp.Areas.Account.ViewModels
 
         [StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 10)]
         [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Phone")]
+        [Display(Name = "Mobile Number")]
         [System.Web.Mvc.Remote("CheckExistingPhoneNumber", "Account", ErrorMessage = "Phone number already exists")]
         public string PhoneNumber { get; set; }
+
+        public string CountyCode { get; set; }
 
         [Required]
         [Display(Name = "Lastname")]
@@ -72,7 +74,7 @@ namespace MyAspNetMvcApp.Areas.Account.ViewModels
         public string FirstName { get; set; }
     }
 
-    public class ChangePasswordViewModel
+    public class ResetPasswordViewModel
     {
         [System.Web.Mvc.HiddenInput(DisplayValue = false)]
         public string Email { get; set; }
@@ -92,4 +94,15 @@ namespace MyAspNetMvcApp.Areas.Account.ViewModels
         public string ConfirmPassword { get; set; }
     }
 
+    public class VerifyPhoneNumberViewModel
+    {
+        [Required]
+        [Display(Name = "Code")]
+        public string Code { get; set; }
+
+        [Required]
+        [Phone]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+    }
 }

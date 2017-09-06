@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyAspNetMvcApp.Areas.Account.Models
 {
@@ -25,7 +27,12 @@ namespace MyAspNetMvcApp.Areas.Account.Models
             set { _userNameEmailBackingField = value; }
         }
 
-        public string PasswordResetCode { get; set; }
+        [MaxLength(20)]
+        [Index(IsUnique = true)]
+        public override string PhoneNumber { get; set; }
+        public string CountyCode { get; set; }
+        public string Token { get; set; }
+        public DateTime? TokenExpiration { get; set; }
         public virtual UserProfile UserProfile { get; set; }
     }
 }

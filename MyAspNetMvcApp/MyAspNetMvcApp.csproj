@@ -110,6 +110,12 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Plivo, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Plivo.3.0.7\lib\net40\Plivo.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=100.0.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharpSigned.105.2.3\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -219,8 +225,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AppSettings.cs" />
     <Compile Include="Helpers\EmailUtil.cs" />
     <Compile Include="Helpers\ImageUploadUtil.cs" />
+    <Compile Include="Helpers\SMSUtil.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppControllerAction.cs" />
     <Compile Include="Models\Book.cs" />
@@ -328,16 +336,12 @@
     <Content Include="Content\geo-bs-swatch\js\jquery.js" />
     <Content Include="Content\geo-bs-swatch\test-full.html" />
     <Content Include="Content\geo-bs-swatch\test.html" />
+    <Content Include="Content\intlTelInput.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\20170410_175509.jpg" />
-    <Content Include="Images\20170410_175629.jpg" />
-    <Content Include="Images\20170412_101825.jpg" />
-    <Content Include="Images\20170412_113140.jpg" />
-    <Content Include="Images\20170412_160025.jpg" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -361,9 +365,13 @@
     <None Include="Properties\PublishProfiles\bernardgabon - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Images\flags%402x.png" />
+    <Content Include="Images\flags.png" />
     <Content Include="Scripts\bootstrap-dialog.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\CountryCodes.json" />
+    <Content Include="Scripts\intlTelInput.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -380,6 +388,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\utils.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -441,6 +450,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />
+    <Folder Include="img\" />
     <Folder Include="Media\" />
     <Folder Include="Views\My\" />
   </ItemGroup>
