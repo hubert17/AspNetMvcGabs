@@ -20,6 +20,14 @@ namespace MyAspNetMvcApp
         {
             get { return ConfigurationManager.AppSettings["AppDomainName"]; }
         }
+        public static string AppDeveloper
+        {
+            get { return ConfigurationManager.AppSettings["AppDeveloper"]; }
+        }
+        public static string AppDevEmail
+        {
+            get { return ConfigurationManager.AppSettings["AppDevEmail"]; }
+        }
         public static bool EmailVerificationEnabled
         {
             get { return Boolean.Parse(ConfigurationManager.AppSettings["EmailVerificationEnabled"]); }
