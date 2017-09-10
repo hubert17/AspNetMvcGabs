@@ -52,6 +52,12 @@
     <Reference Include="JetEntityFrameworkProvider, Version=1.2.11.0, Culture=neutral, PublicKeyToken=756cf6beb8fe7b41, processorArchitecture=x86">
       <HintPath>..\packages\JetEntityFrameworkProvider.1.2.11\lib\JetEntityFrameworkProvider.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
     </Reference>
@@ -88,6 +94,9 @@
     </Reference>
     <Reference Include="RestSharp, Version=100.0.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharpSigned.105.2.3\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.6.4\lib\net40\Rotativa.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -173,7 +182,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
     <Compile Include="Areas\Account\Models\ApplicationUser.cs" />
     <Compile Include="Areas\Account\Controllers\AccountController.cs" />
@@ -196,6 +204,7 @@
     <Compile Include="Controllers\Progbasic3w1Controller.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Areas\Account\Controllers\RolesController.cs" />
+    <Compile Include="Controllers\SignalrSampleController.cs" />
     <Compile Include="Controllers\VinChatController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -221,6 +230,7 @@
     <Compile Include="Areas\Account\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\_ApplicationDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SignalRHub.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="Controllers\WorkingWithDataController.cs" />
@@ -319,9 +329,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\geo-bs-swatch\pages.zip" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -342,6 +349,7 @@
     <Content Include="Areas\Docs\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Docs\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Docs\Views\Docs\Index.cshtml" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Properties\PublishProfiles\bernardgabon - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\bernardgabon - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
@@ -349,6 +357,7 @@
     <Content Include="Images\flags%402x.png" />
     <Content Include="Images\flags.png" />
     <Content Include="Project_Readme.html" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap-dialog.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -365,6 +374,8 @@
     <Content Include="Scripts\jquery.dotanimation.custom.js" />
     <Content Include="Scripts\jquery.dotanimation.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -434,6 +445,10 @@
     <Content Include="Views\Book3\Edit.cshtml" />
     <Content Include="Views\Book3\Index.cshtml" />
     <Content Include="Views\Email\Index.cshtml" />
+    <Content Include="Views\SignalrSample\Index.cshtml" />
+    <Content Include="Views\SignalrSample\Create.cshtml" />
+    <Content Include="Views\SignalrSample\_GetBook.cshtml" />
+    <Content Include="Views\SignalrSample\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />
