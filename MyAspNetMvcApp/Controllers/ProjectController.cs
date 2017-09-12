@@ -51,7 +51,7 @@ namespace MyAspNetMvcApp.Controllers
         {
             db.Projects.Add(p);
             db.SaveChanges();
-            return View();
+            return RedirectToAction("CreateProject");
         }
 
     }

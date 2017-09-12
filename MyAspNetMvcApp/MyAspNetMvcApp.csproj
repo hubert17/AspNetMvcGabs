@@ -200,6 +200,7 @@
     <Compile Include="Controllers\Lesson4Controller.cs" />
     <Compile Include="Controllers\ListController.cs" />
     <Compile Include="Controllers\MyController.cs" />
+    <Compile Include="Controllers\PdfSampleController.cs" />
     <Compile Include="Controllers\PoordooytifyController.cs" />
     <Compile Include="Controllers\Progbasic3w1Controller.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
@@ -238,6 +239,7 @@
   <ItemGroup>
     <Content Include="App_Data\MyAspNetMvcDb.mdb" />
     <Content Include="Content\bootstrap-dialog.css" />
+    <Content Include="Content\bootstrap-print-fix.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -449,6 +451,10 @@
     <Content Include="Views\SignalrSample\Create.cshtml" />
     <Content Include="Views\SignalrSample\_GetBook.cshtml" />
     <Content Include="Views\SignalrSample\Edit.cshtml" />
+    <Content Include="Views\Shared\_GoogleAnalytics.cshtml" />
+    <Content Include="Views\PdfSample\Index.cshtml" />
+    <Content Include="Views\Shared\_PdfLayout.cshtml" />
+    <Content Include="Views\PdfSample\Print.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />

@@ -30,29 +30,31 @@ namespace MyAspNetMvcApp.Migrations
             }
 
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            var username = "admin1";
+            var username = System.Configuration.ConfigurationManager.AppSettings["AdminUsername"];
             if ((userManager.FindByName(username) == null))
             {
                 
                 var user = new ApplicationUser
                 {
                     UserName = username,
-                    UserProfile = new UserProfile { UserName = username, LastName = "Admin", FirstName = "Admin", RegistrationDate = DateTime.Now, InActive = false}
+                    PhoneNumber = "1234567890",
+                    UserProfile = new UserProfile { UserName = username, LastName = "Admin", FirstName = "Temp", RegistrationDate = DateTime.Now, InActive = false}
                 };
-                userManager.Create(user, "password1");
+                userManager.Create(user, System.Configuration.ConfigurationManager.AppSettings["AdminPassword"]);
                 userManager.AddToRole(user.Id, "admin");
 
 
             }
-            username = "user1";
+            username = System.Configuration.ConfigurationManager.AppSettings["TempUsername"];
             if ((userManager.FindByName(username) == null))
             {
                 var user = new ApplicationUser
                 {
                     UserName = username,
-                    UserProfile = new UserProfile { UserName = username, LastName= "User", FirstName = "User", RegistrationDate = DateTime.Now, InActive = false}
+                    PhoneNumber = "9876543210",
+                    UserProfile = new UserProfile { UserName = username, LastName= "User", FirstName = "Temp", RegistrationDate = DateTime.Now, InActive = false}
                 };
-                userManager.Create(user, "userpass1");
+                userManager.Create(user, System.Configuration.ConfigurationManager.AppSettings["TempPassword"]);
             }
 
         }
