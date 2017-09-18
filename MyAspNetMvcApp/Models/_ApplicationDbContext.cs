@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MyAspNetMvcApp.Areas.Account.Models;
+using MyAspNetMvcApp.Models.OrderApp;
 
 namespace MyAspNetMvcApp.Models
 {
@@ -21,5 +22,9 @@ namespace MyAspNetMvcApp.Models
         public DbSet<Submission> Submissions { get; set; }
         public DbSet<Book> Books { get; set; }
 
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
     }
 }

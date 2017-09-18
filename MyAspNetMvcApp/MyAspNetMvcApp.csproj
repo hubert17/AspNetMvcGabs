@@ -200,8 +200,10 @@
     <Compile Include="Controllers\Lesson4Controller.cs" />
     <Compile Include="Controllers\ListController.cs" />
     <Compile Include="Controllers\MyController.cs" />
+    <Compile Include="Controllers\OnlineshopController.cs" />
     <Compile Include="Controllers\PdfSampleController.cs" />
     <Compile Include="Controllers\PoordooytifyController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\Progbasic3w1Controller.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Areas\Account\Controllers\RolesController.cs" />
@@ -222,7 +224,13 @@
     <Compile Include="Models\Email.cs" />
     <Compile Include="Models\Lessons\Grade.cs" />
     <Compile Include="Models\Lessons\Song.cs" />
+    <Compile Include="Models\Lookup.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\OrderApp\Category.cs" />
+    <Compile Include="Models\OrderApp\Customer.cs" />
+    <Compile Include="Models\OrderApp\Order.cs" />
+    <Compile Include="Models\OrderApp\OrderItem.cs" />
+    <Compile Include="Models\OrderApp\Product.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\Song.cs" />
     <Compile Include="Models\Student.cs" />
@@ -455,6 +463,12 @@
     <Content Include="Views\PdfSample\Index.cshtml" />
     <Content Include="Views\Shared\_PdfLayout.cshtml" />
     <Content Include="Views\PdfSample\Print.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Onlineshop\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />

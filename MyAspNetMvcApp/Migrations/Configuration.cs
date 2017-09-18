@@ -9,19 +9,19 @@ namespace MyAspNetMvcApp.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<MyAspNetMvcApp.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(MyAspNetMvcApp.Models.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
             SeedIdentity(context);
         }
 
-        private void SeedIdentity(MyAspNetMvcApp.Models.ApplicationDbContext context)
+        private void SeedIdentity(ApplicationDbContext context)
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             if (!context.Roles.Any(r => r.Name == "admin"))
