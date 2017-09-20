@@ -20,9 +20,9 @@ namespace MyAspNetMvcApp.Controllers
 
             if (TempData.Keys.Count <= 0)
             {
-                ViewBag.MessageBox = "Welcome to Book app!";
-                ViewBag.MessagePanel = "Welcome to Book app!";
-                ViewBag.MessageAlert = "Welcome to Book app!";
+                ViewBag.MessageBox = "Welcome to Book app by Bootstrap Modal!";
+                ViewBag.MessagePanel = "Welcome to Book app by BS Alert Panel!";
+                ViewBag.MessageAlert = "Welcome to Book app by Kavascript Alert !";
             }
 
             return View(books);

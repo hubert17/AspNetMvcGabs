@@ -23,7 +23,7 @@ namespace Gabs.Helpers
             IRestResponse<MessageResponse> resp = plivo.send_message(new Dictionary<string, string>()
             {
                 { "src", SENDER_NO }, // Sender's phone number with country code
-                { "dst", mobileNo }, // Receiver's phone number wiht country code
+                { "dst", mobileNo }, // Receiver's phone number with country code
                 { "text", smsMessage }, // Your SMS text message
                 { "url", "http://dotnettest.apphb.com/delivery_report"}, // The URL to which with the status of the message is sent
                 { "method", "POST"} // Method to invoke the url

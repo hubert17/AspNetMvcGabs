@@ -203,6 +203,7 @@
     <Compile Include="Controllers\OnlineshopController.cs" />
     <Compile Include="Controllers\PdfSampleController.cs" />
     <Compile Include="Controllers\PoordooytifyController.cs" />
+    <Compile Include="Controllers\Products1Controller.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\Progbasic3w1Controller.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
@@ -475,6 +476,12 @@
     <Content Include="Views\StoreProducts\Details.cshtml" />
     <Content Include="Views\StoreProducts\Edit.cshtml" />
     <Content Include="Views\StoreProducts\Index.cshtml" />
+    <Content Include="Views\Products1\Create.cshtml" />
+    <Content Include="Views\Products1\Delete.cshtml" />
+    <Content Include="Views\Products1\Details.cshtml" />
+    <Content Include="Views\Products1\Edit.cshtml" />
+    <Content Include="Views\Products1\Index.cshtml" />
+    <Content Include="Views\Products1\Bootstrap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />
