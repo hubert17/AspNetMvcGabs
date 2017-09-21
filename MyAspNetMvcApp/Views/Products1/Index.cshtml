@@ -12,6 +12,14 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
+<form action="/products1/index">
+    <input type="text" name="keyword" placeholder="Search" />
+    <button type="submit">Search</button>
+</form>
+
+<a href="/products1/index?sort=1">Sort from cheapest price</a>
+<a href="/products1/index?sort=2">Sort by Name</a>
+
 @foreach (var item in Model)
 {
     <div class="col-md-3">

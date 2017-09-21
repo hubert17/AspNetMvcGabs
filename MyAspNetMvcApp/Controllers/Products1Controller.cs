@@ -11,14 +11,35 @@ using MyAspNetMvcApp.Models.OrderApp;
 
 namespace MyAspNetMvcApp.Controllers
 {
+    [Authorize]
     public class Products1Controller : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+         
         // GET: Products1
-        public ActionResult Index()
+        [AllowAnonymous]
+        public ActionResult Index(string keyword, int sort = 0)
         {
-            return View(db.Products.ToList());
+            List<Product> products;
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+               products  = db.Products.ToList();
+            }
+            else
+            {
+                products = db.Products.Where(x => x.Name.Contains(keyword)).ToList();
+            }
+
+            if(sort == 1)
+            {
+                products = products.OrderBy(x => x.Price).ToList();
+            }
+            else if(sort == 2)
+            {
+                products = products.OrderBy(x => x.Name).ToList();
+            }
+
+            return View(products);
         }
 
         public ActionResult Bootstrap()
@@ -42,6 +63,7 @@ namespace MyAspNetMvcApp.Controllers
         }
 
         // GET: Products1/Create
+        [Authorize(Roles = @"staff")]
         public ActionResult Create()
         {
             return View();

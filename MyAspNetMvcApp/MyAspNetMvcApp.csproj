@@ -362,6 +362,8 @@
     <Content Include="Areas\Docs\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Docs\Views\Docs\Index.cshtml" />
     <Content Include="App_Browsers\qt.browser" />
+    <Content Include="Areas\Docs\Views\Docs\_Download.cshtml" />
+    <Content Include="Areas\Docs\Views\Docs\_template.cshtml" />
     <None Include="Properties\PublishProfiles\bernardgabon - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\bernardgabon - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
