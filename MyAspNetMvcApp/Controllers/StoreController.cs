@@ -12,18 +12,18 @@ using MyAspNetMvcApp.Models.OrderApp;
 namespace MyAspNetMvcApp.Controllers
 {
     [Authorize]
-    public class Products1Controller : Controller
+    public class StoreController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-         
-        // GET: Products1
+
+        // GET: Store
         [AllowAnonymous]
         public ActionResult Index(string keyword, int sort = 0)
         {
             List<Product> products;
-            if (string.IsNullOrWhiteSpace(keyword))
+            if(string.IsNullOrWhiteSpace(keyword))
             {
-               products  = db.Products.ToList();
+                products = db.Products.ToList();
             }
             else
             {
@@ -42,12 +42,8 @@ namespace MyAspNetMvcApp.Controllers
             return View(products);
         }
 
-        public ActionResult Bootstrap()
-        {
-            return View();
-        }
-
-        // GET: Products1/Details/5
+        // GET: Store/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -62,26 +58,28 @@ namespace MyAspNetMvcApp.Controllers
             return View(product);
         }
 
-        // GET: Products1/Create
-        [Authorize(Roles = "staff")]
+        // GET: Store/Create
+        [Authorize(Roles = @"staff")]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Products1/Create
+        // POST: Store/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Product product, HttpPostedFileBase FileUpload)
         {
-            product.Picture = Gabs.Helpers.ImageUploadUtil.FileToByteArray(FileUpload);
+            //product.Picture = Gabs.Helpers.ImageUploadUtil.FileToByteArray(FileUpload);
+           product.PictureFilename = Gabs.Helpers.ImageUploadUtil.SaveToJpegFile(FileUpload);
             db.Products.Add(product);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        // GET: Products1/Edit/5
+        // GET: Store/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -96,7 +94,7 @@ namespace MyAspNetMvcApp.Controllers
             return View(product);
         }
 
-        // POST: Products1/Edit/5
+        // POST: Store/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -112,7 +110,7 @@ namespace MyAspNetMvcApp.Controllers
             return View(product);
         }
 
-        // GET: Products1/Delete/5
+        // GET: Store/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -127,7 +125,7 @@ namespace MyAspNetMvcApp.Controllers
             return View(product);
         }
 
-        // POST: Products1/Delete/5
+        // POST: Store/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

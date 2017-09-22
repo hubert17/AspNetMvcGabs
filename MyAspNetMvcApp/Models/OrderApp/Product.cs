@@ -13,5 +13,6 @@ namespace MyAspNetMvcApp.Models.OrderApp
         public int CategoryId { get; set; }
         public double Price { get; set; }
         public byte[] Picture { get; set; }
+        public string PictureFilename { get; set; }
     }
 }

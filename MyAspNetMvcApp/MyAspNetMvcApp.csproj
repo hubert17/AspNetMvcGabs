@@ -209,6 +209,7 @@
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Areas\Account\Controllers\RolesController.cs" />
     <Compile Include="Controllers\SignalrSampleController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\StoreProductsController.cs" />
     <Compile Include="Controllers\VinChatController.cs" />
     <Compile Include="Global.asax.cs">
@@ -484,6 +485,11 @@
     <Content Include="Views\Products1\Edit.cshtml" />
     <Content Include="Views\Products1\Index.cshtml" />
     <Content Include="Views\Products1\Bootstrap.cshtml" />
+    <Content Include="Views\Store\Create.cshtml" />
+    <Content Include="Views\Store\Delete.cshtml" />
+    <Content Include="Views\Store\Details.cshtml" />
+    <Content Include="Views\Store\Edit.cshtml" />
+    <Content Include="Views\Store\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />
