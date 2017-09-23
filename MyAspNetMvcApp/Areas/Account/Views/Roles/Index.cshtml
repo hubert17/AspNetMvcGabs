@@ -83,7 +83,7 @@
                                         _btnAction = "UnlockUser";
                                     }
                                 }
-                                <td><a href="/Roles/@_btnAction?UserName=@user.UserName" class="btn btn-danger" title="@_btnLabel" @_disabled><span class="glyphicon @_btnIcon"></span></a></td>
+                                <td><a href="/Roles/@_btnAction?UserName=@user.UserName" class="btn btn-danger @_disabled" title="@_btnLabel" @_disabled><span class="glyphicon @_btnIcon"></span></a></td>
                             </tr>
                         </table>
                         <div class="row">
@@ -106,9 +106,13 @@
                                                 @Html.ValidationSummary(true)
                                                 <input type="hidden" name="UserName" id="UserName" value="@user.UserName" />
                                                 <input type="hidden" name="RoleName" id="RoleName" value="@roles" />
-                                                @if (roles == "admin" && user.UserName == User.Identity.Name)
+                                                @if (user.UserName == System.Configuration.ConfigurationManager.AppSettings["AdminUsername"])
                                                 {
-                                                    @roles <button type="submit" class="btn btn-danger btn-xs" onClick="return confirm('Warning: You are about to remove yourself from the admin group. Continue?')"><span class="glyphicon glyphicon-remove" ></span></button>
+                                                    @roles <button type="button" class="btn btn-danger btn-xs disabled" disabled><span class="glyphicon glyphicon-remove"></span></button>
+                                                }
+                                                else if (roles == "admin" && user.UserName == User.Identity.Name)
+                                                {
+                                                    @roles <button type="submit" class="btn btn-danger btn-xs" onClick="return confirm('Warning: You are about to remove yourself from the admin group. Continue?')"><span class="glyphicon glyphicon-remove"></span></button>
                                                 }
                                                 else
                                                 {
@@ -147,8 +151,8 @@
                                     <dd>@user.UserProfile.FirstName @user.UserProfile.LastName</dd>
                                     <dt>Registration Date</dt>
                                     <dd>@user.UserProfile.RegistrationDate</dd>
-                                    <dt>Inactive?</dt>
-                                    <dd>@user.UserProfile.InActive.ToString()</dd>
+                                    <dt>Active</dt>
+                                    <dd>@((bool) user.UserProfile.InActive ? "Banned" : "Yes") </dd>
                                     <dt>Last Login</dt>
                                     <dd>@user.UserProfile.LastLogin</dd>
                                 </dl>

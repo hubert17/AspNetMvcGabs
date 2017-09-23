@@ -61,9 +61,6 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null && user.UserProfile.InActive == false)
                 {
-                    user.UserProfile.LastLogin = DateTime.Now;
-                    await UserManager.UpdateAsync(user);
-
                     await SignInAsync(user, model.RememberMe);
                     if(string.IsNullOrEmpty(returnUrl))
                         return RedirectToAction("index", "home", new { area = "" });
@@ -77,6 +74,7 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
             }
 
             // If we got this far, something failed, redisplay form
+            ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
 
@@ -403,10 +401,12 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
         private async Task SignInAsync(ApplicationUser user, bool isPersistent)
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+
+            user.UserProfile.LastLogin = DateTime.Now;
+            await UserManager.UpdateAsync(user);
+
             var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
-
-
         }
 
         private void AddErrors(IdentityResult result)
