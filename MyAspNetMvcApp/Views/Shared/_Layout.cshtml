@@ -20,6 +20,7 @@
         alert('@ViewBag.MessageAlert')
     </script>
 }
+
 @if (HttpContext.Current.Request.IsLocal)
 {
     <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet">
@@ -182,7 +183,7 @@ else
 
 @RenderSection("scripts", required: false)
 
-    @*This is to remove the overlay ad in Somee.com*@
+    @* This is to remove the overlay ad in Somee.com *@
     <script>
         $(document).ready(function () {
             $('#nextAll').nextAll().remove();
