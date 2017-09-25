@@ -13,5 +13,7 @@ namespace MyAspNetMvcApp.Models.OrderApp
         //Navigation property
         public Product Product { get; set; }
         public int Quantity { get; set; }
+        public int OrderId { get; set; }
+
     }
 }

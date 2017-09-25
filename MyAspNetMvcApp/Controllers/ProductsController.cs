@@ -16,6 +16,7 @@ namespace MyAspNetMvcApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Products
+        [AllowAnonymous]
         public ActionResult Index(string keyword)
         {
             List<Product> result;
@@ -34,19 +35,12 @@ namespace MyAspNetMvcApp.Controllers
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
             return View(product);
         }
 
         // GET: Products/Create
+        [Authorize(Roles = "staff")]
         public ActionResult Create()
         {
             return View();

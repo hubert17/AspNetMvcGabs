@@ -11,11 +11,13 @@ using MyAspNetMvcApp.Models.OrderApp;
 
 namespace MyAspNetMvcApp.Controllers
 {
+    [Authorize]
     public class StoreProductsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: StoreProducts
+        [AllowAnonymous]
         public ActionResult Index(string keyword, int sort = 1)
         {
             List<Product> result;
@@ -40,19 +42,12 @@ namespace MyAspNetMvcApp.Controllers
         // GET: StoreProducts/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
             return View(product);
         }
 
         // GET: StoreProducts/Create
+        [Authorize(Roles = "staff")]
         public ActionResult Create()
         {
             return View();

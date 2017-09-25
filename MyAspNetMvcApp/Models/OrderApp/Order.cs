@@ -8,7 +8,7 @@ namespace MyAspNetMvcApp.Models.OrderApp
     public class Order
     {
         public int Id { get; set; }        
-        public int CustomerId { get; set; } //Foreign Key        
+        public string UserName { get; set; } //Foreign Key        
         public Customer Customer { get; set; } //Navigation property
         public DateTime OrderDate { get; set; }
         public int Status { get; set; }
