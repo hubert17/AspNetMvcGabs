@@ -28,7 +28,7 @@ namespace MyAspNetMvcApp.Controllers
             {
                 result = db.Products.Where(p => p.Name.Contains(keyword)).ToList();
             }
-
+            
             return View(result);
         }
 

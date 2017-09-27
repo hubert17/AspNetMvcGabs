@@ -95,7 +95,10 @@
                 <div style="float:right; font-size: 80%; position: relative; top:-15px"><a id="forgotlink" href="#" onclick="$('#forgotbox').hide(); $('#loginForm').show()">Sign In</a></div>
             </div>
             <div class="panel-body">
-                <div id="forgotalert" class="alert alert-warning hidden" style="font-style:italic;">
+                <div id="forgotalert" class="alert alert-warning" style="font-style:italic;">
+                    <p>
+                        Enter your email address and we will send you instructions on how to reset your password.
+                    </p>
                 </div>
                 <div class="col-md-10">
                     <div id="forgotform" class="form-horizontal" role="form">
@@ -109,7 +112,7 @@
                         <div class="form-group">
                             <!-- Button -->
                             <div class="col-md-offset-3 col-md-9">
-                                <button id="btn-forgot" type="button" class="btn btn-info"><i class="icon-hand-right"></i>Submit</button>
+                                <button id="btn-forgot" type="button" class="btn btn-info"><i class="icon-hand-right"></i>Reset Password</button>
                             </div>
                         </div>
 
@@ -161,7 +164,7 @@
                         else {
                             $('#forgotalert').html('Check your inbox.');
                         }
-                        $('#forgotalert').removeClass('hidden');
+                        //$('#forgotalert').removeClass('hidden');
                     }
                 });
             });

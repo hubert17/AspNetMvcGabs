@@ -8,6 +8,7 @@ namespace MyAspNetMvcApp.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using MyAspNetMvcApp.Areas.App.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
@@ -19,6 +20,18 @@ namespace MyAspNetMvcApp.Migrations
         protected override void Seed(ApplicationDbContext context)
         {
             SeedIdentity(context);
+            SeedLookup(context);
+
+        }
+
+        private void SeedLookup(ApplicationDbContext context)
+        {
+            context.Lookups.AddOrUpdate(
+              p => p.Key,
+                new Lookup { Type = "gender", Key = 1, Value = "Male" },
+                new Lookup { Type = "gender", Key = 2, Value = "Female" }
+            );
+
         }
 
         private void SeedIdentity(ApplicationDbContext context)

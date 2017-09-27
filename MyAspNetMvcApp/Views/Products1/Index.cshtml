@@ -24,11 +24,13 @@
 {
     <div class="col-md-3">
         <div class="thumbnail">
-            <img src="data:image/jpg;base64,@Convert.ToBase64String(item.Picture)" class="img-responsive img-rounded" />
+            <a href="/products1/details?id=@item.Id">
+                <img src="data:image/jpg;base64,@Convert.ToBase64String(item.Picture)" class="img-responsive img-rounded" />
+            </a>
             <div class="caption">
                 <h4 class="pull-right">@item.Price</h4>
                 <h4>
-                    <a href="#">@item.Name</a>
+                    <a href="/products1/details?id=@item.Id">@item.Name</a>
                 </h4>
             </div>
             <div class="ratings">

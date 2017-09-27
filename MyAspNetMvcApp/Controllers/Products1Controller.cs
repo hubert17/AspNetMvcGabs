@@ -48,17 +48,10 @@ namespace MyAspNetMvcApp.Controllers
         }
 
         // GET: Products1/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
             return View(product);
         }
 

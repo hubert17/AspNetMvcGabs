@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using MyAspNetMvcApp.Models.OrderApp;
 using MyAspNetMvcApp.Models;
+using MyAspNetMvcApp.ViewModels;
+using System.Data.Entity;
 
 namespace MyAspNetMvcApp.Controllers
 {
@@ -15,7 +17,29 @@ namespace MyAspNetMvcApp.Controllers
         // GET: ShoppingCart
         public ActionResult Index()
         {
-            return View();
+            OrderViewModel OrderVM = db.Orders.Where(x => x.UserName == User.Identity.Name && x.Status == -1)
+                .Include(c => c.Customer)
+                .Include(i => i.Customer.Profile)
+                .Select(s => new OrderViewModel
+                {
+                    OrderId = s.Id,
+                    CustomerName = s.Customer.Profile.FirstName + " " + s.Customer.Profile.LastName,
+                    OrderDate = s.OrderDate
+                }).FirstOrDefault();
+
+            OrderVM.OrderItems = db.OrderItems.Where(x => x.OrderId == OrderVM.OrderId)
+                .Include(p => p.Product)
+                .Select(s => new OrderItemViewModel
+                {
+                    ProductName = s.Product.Name,
+                    Quantity = s.Quantity,
+                    Price = s.Product.Price,
+                    Amount = s.Quantity * s.Product.Price
+                }).ToList();
+
+            OrderVM.OrderTotal = OrderVM.OrderItems.Sum(t => t.Amount);
+
+            return View(OrderVM);
         }
 
         [HttpPost]
@@ -47,7 +71,7 @@ namespace MyAspNetMvcApp.Controllers
             db.OrderItems.Add(myItem);
             db.SaveChanges();
 
-            return RedirectToAction("Index", "StoreProducts");
+            return RedirectToAction("Index");
         }
     }
 }

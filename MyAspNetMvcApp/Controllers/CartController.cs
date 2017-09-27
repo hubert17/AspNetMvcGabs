@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyAspNetMvcApp.ViewModels;
+using System.Data.Entity;
 
 namespace MyAspNetMvcApp.Controllers
 {
@@ -15,6 +17,25 @@ namespace MyAspNetMvcApp.Controllers
         // GET: Cart
         public ActionResult Index()
         {
+            OrderViewModel OrderVM = db.Orders
+                .Where(x => x.UserName == User.Identity.Name && x.Status == -1)
+                .Include(c => c.Customer).Include(u => u.Customer.Profile)
+                .Select(s => new OrderViewModel
+                {
+                    OrderId = s.Id,
+                    CustomerName = s.Customer.Profile.FirstName + " " + s.Customer.Profile.LastName
+                }).FirstOrDefault();
+
+            OrderVM.OrderItems = db.OrderItems.Where(x => x.OrderId == OrderVM.OrderId)
+                .Include(p => p.Product)
+                .Select(s => new OrderItemViewModel
+                {
+                    ProductName = s.Product.Name,
+                    Quantity = s.Quantity,
+                    Price = s.Product.Price,
+                    Amount = s.Quantity * s.Product.Price
+                }).ToList();
+
             return View();
         }
 

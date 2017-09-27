@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MyAspNetMvcApp.Areas.Account.Models;
+using MyAspNetMvcApp.Areas.App.Models;
 using MyAspNetMvcApp.Models.OrderApp;
 
 namespace MyAspNetMvcApp.Models
@@ -16,6 +17,7 @@ namespace MyAspNetMvcApp.Models
 
         // DO NOT REMOVE THIS!
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Lookup> Lookups { get; set; }
 
         // Put your database tables here...
         public DbSet<Project> Projects { get; set; }

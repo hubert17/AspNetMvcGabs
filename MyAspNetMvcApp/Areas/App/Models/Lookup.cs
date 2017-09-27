@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace MyAspNetMvcApp.Models
+namespace MyAspNetMvcApp.Areas.App.Models
 {
     public class Lookup
     {
