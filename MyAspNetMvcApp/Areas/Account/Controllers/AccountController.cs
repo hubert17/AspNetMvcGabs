@@ -109,6 +109,7 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
                         InActive = false
                     }
                 };
+
                 if(AppSettings.EmailVerificationEnabled)
                 {
                     char[] padding = { '=' };
@@ -119,6 +120,8 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    RegisterViewModel.SaveRegistrationCustomData(model);
+
                     string WelcomeMsg = "Hello " + model.FirstName + "! Welcome to " + AppSettings.AppTitle + ". "; ;
                     if(AppSettings.EmailVerificationEnabled)
                     {

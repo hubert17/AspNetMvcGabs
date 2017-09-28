@@ -19,11 +19,11 @@ namespace MyAspNetMvcApp.Controllers
         {
             OrderViewModel OrderVM = db.Orders.Where(x => x.UserName == User.Identity.Name && x.Status == -1)
                 .Include(c => c.Customer)
-                .Include(i => i.Customer.Profile)
+                .Include(i => i.Customer)
                 .Select(s => new OrderViewModel
                 {
                     OrderId = s.Id,
-                    CustomerName = s.Customer.Profile.FirstName + " " + s.Customer.Profile.LastName,
+                    CustomerName = s.Customer.FirstName + " " + s.Customer.LastName,
                     OrderDate = s.OrderDate
                 }).FirstOrDefault();
 

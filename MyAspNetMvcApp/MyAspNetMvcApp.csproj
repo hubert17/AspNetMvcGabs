@@ -188,6 +188,7 @@
     <Compile Include="Areas\App\AppAreaRegistration.cs" />
     <Compile Include="Areas\App\Controllers\LookupController.cs" />
     <Compile Include="Areas\App\Models\Lookup.cs" />
+    <Compile Include="Areas\App\Models\LookupViewModel.cs" />
     <Compile Include="Areas\Docs\Controllers\DocsController.cs" />
     <Compile Include="Areas\Docs\DocsAreaRegistration.cs" />
     <Compile Include="Controllers\Activity2Controller.cs" />
@@ -254,6 +255,7 @@
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="Controllers\WorkingWithDataController.cs" />
+    <Compile Include="ViewModels\_RegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\MyAspNetMvcDb.mdb" />
@@ -263,6 +265,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\datatables.css" />
     <Content Include="Content\Docs\prism.css" />
     <Content Include="Content\Docs\styles.css" />
     <Content Include="Content\font-awesome.css" />
@@ -375,9 +378,11 @@
     <Content Include="Areas\Docs\Views\Docs\_template.cshtml" />
     <Content Include="Areas\App\Views\web.config" />
     <Content Include="Areas\App\Views\Lookup\Index.cshtml" />
+    <Content Include="Areas\App\Views\Lookup\Create.cshtml" />
     <None Include="Properties\PublishProfiles\bernardgabon - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\bernardgabon - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <Content Include="Scripts\datatables.min.js" />
     <Content Include="Scripts\Docs\prism.aspnet.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Images\flags%402x.png" />
@@ -500,6 +505,7 @@
     <Content Include="Views\Ajaxsample\_book.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\Shared\_Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />

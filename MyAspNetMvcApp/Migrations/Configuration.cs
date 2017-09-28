@@ -29,7 +29,17 @@ namespace MyAspNetMvcApp.Migrations
             context.Lookups.AddOrUpdate(
               p => p.Key,
                 new Lookup { Type = "gender", Key = 1, Value = "Male" },
-                new Lookup { Type = "gender", Key = 2, Value = "Female" }
+                new Lookup { Type = "gender", Key = 2, Value = "Female" },
+                new Lookup { Type = "order_status", Key = -1, Value = "Shopping"},
+                new Lookup { Type = "order_status", Key = 10, Value = "Pending" },
+                new Lookup { Type = "order_status", Key = 11, Value = "Processing" },
+                new Lookup { Type = "order_status", Key = 12, Value = "Shipping" },
+                new Lookup { Type = "order_status", Key = 13, Value = "Delivered" },
+                new Lookup { Type = "product_category", Key = 20, Value = "Men's Clothing" },
+                new Lookup { Type = "product_category", Key = 21, Value = "Women’s Clothing" },
+                new Lookup { Type = "product_category", Key = 22, Value = "Computer & Office" },
+                new Lookup { Type = "product_category", Key = 23, Value = "Consumer Electronics" },
+                new Lookup { Type = "product_category", Key = 24, Value = "Toys, Kids & Baby" }
             );
 
         }

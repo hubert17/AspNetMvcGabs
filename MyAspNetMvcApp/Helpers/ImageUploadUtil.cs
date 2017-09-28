@@ -207,16 +207,26 @@ namespace Gabs.Helpers
         /// <returns>byte[] JpegImage</returns>
         public static byte[] ResizeToThumbnail(byte[] image, int Width = THUMBNAIL_WIDTH, int Height = THUMBNAIL_HEIGHT, bool highQuality = false)
         {
-            Image img;
-            using (var ms = new MemoryStream(image))
+            try
             {
-                img = Image.FromStream(ms);
+                Image img;
+                using (var ms = new MemoryStream(image))
+                {
+                    img = Image.FromStream(ms);
+                }
+                var resizeImage = FixedSize(img, Width, Height, highQuality);
+                using (var ms = new MemoryStream())
+                {
+                    resizeImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    return ms.ToArray();
+                }
             }
-            var resizeImage = FixedSize(img, Width, Height, highQuality);
-            using (var ms = new MemoryStream())
+            catch
             {
-                resizeImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-                return ms.ToArray();
+                //Byte[] arrBlankImage = new Byte[64];
+                //Array.Clear(arrBlankImage, 0, arrBlankImage.Length);
+                //return arrBlankImage;
+                return null;
             }
         }
 

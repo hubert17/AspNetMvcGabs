@@ -9,7 +9,16 @@
 
 
 <div class="thumbnail">
-    <img class="img-responsive" src="data:image/jpg;base64,@Convert.ToBase64String(Model.Picture)" width="800" />
+    @try
+    {
+        <img class="img-responsive" src="data:image/jpg;base64,@Convert.ToBase64String(Model.Picture)" width="800" />
+    }
+    catch
+    {
+        <img class="img-responsive" src="/@Gabs.Helpers.ImageUploadUtil.FOLDER/@Model.PictureFilename" width="800" />
+    }
+
+
     <div class="caption-full">
         <h4 class="pull-right">@Model.Price</h4>
         <h4>

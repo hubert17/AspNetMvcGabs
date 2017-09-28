@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MyAspNetMvcApp.Areas.Account.ViewModels
 {
-    public class RegisterViewModel
+    public partial class RegisterViewModel
     {
         [Required]
         [Display(Name = "Email")]
