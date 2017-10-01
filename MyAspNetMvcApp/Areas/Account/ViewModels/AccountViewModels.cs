@@ -31,6 +31,8 @@ namespace MyAspNetMvcApp.Areas.Account.ViewModels
 
         public string CountyCode { get; set; }
 
+        public string UserType { get; set; }
+
         [Required]
         [Display(Name = "Lastname")]
         public string LastName { get; set; }

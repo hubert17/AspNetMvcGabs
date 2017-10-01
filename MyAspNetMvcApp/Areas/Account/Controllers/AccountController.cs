@@ -59,7 +59,7 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
                     }
                 }
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
-                if (user != null && user.UserProfile.InActive == false)
+                if (user != null && user.UserProfile.IsActive)
                 {
                     await SignInAsync(user, model.RememberMe);
                     if(string.IsNullOrEmpty(returnUrl))
@@ -103,10 +103,11 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
                     UserProfile = new UserProfile
                     {
                         UserName = model.UserName,
+                        UserType = model.UserType,
                         LastName = model.LastName,
                         FirstName = model.FirstName,
                         RegistrationDate = DateTime.Now,
-                        InActive = false
+                        IsActive = true
                     }
                 };
 

@@ -60,8 +60,8 @@ namespace MyAspNetMvcApp.Migrations
                 var user = new ApplicationUser
                 {
                     UserName = username,
-                    PhoneNumber = "1234567890",
-                    UserProfile = new UserProfile { UserName = username, LastName = "Admin", FirstName = "Temp", RegistrationDate = DateTime.Now, InActive = false }
+                    PhoneNumber = "1234567890",                    
+                    UserProfile = new UserProfile { UserName = username, UserType = "admin", LastName = "Admin", FirstName = "Temp", RegistrationDate = DateTime.Now, IsActive = true }
                 };
                 userManager.Create(user, System.Configuration.ConfigurationManager.AppSettings["AdminPassword"]);
                 userManager.AddToRole(user.Id, "admin");
@@ -75,7 +75,7 @@ namespace MyAspNetMvcApp.Migrations
                 {
                     UserName = username,
                     PhoneNumber = "9876543210",
-                    UserProfile = new UserProfile { UserName = username, LastName = "User", FirstName = "Temp", RegistrationDate = DateTime.Now, InActive = false }
+                    UserProfile = new UserProfile { UserName = username, LastName = "User", FirstName = "Temp", RegistrationDate = DateTime.Now, IsActive = true }
                 };
                 userManager.Create(user, System.Configuration.ConfigurationManager.AppSettings["TempPassword"]);
             }

@@ -76,7 +76,7 @@
                                     var _btnLabel = "Deactivate this user?";
                                     var _btnIcon = "glyphicon-bookmark";
                                     var _btnAction = "LockUser";
-                                    if (user.UserProfile.InActive == true)
+                                    if (!user.UserProfile.IsActive)
                                     {
                                         _btnLabel = "Activate this user?";
                                         _btnIcon = "glyphicon-ban-circle";
@@ -152,7 +152,7 @@
                                     <dt>Registration Date</dt>
                                     <dd>@user.UserProfile.RegistrationDate</dd>
                                     <dt>Active</dt>
-                                    <dd>@((bool) user.UserProfile.InActive ? "Banned" : "Yes") </dd>
+                                    <dd>@((bool) user.UserProfile.IsActive ? "Yes" : "No") </dd>
                                     <dt>Last Login</dt>
                                     <dd>@user.UserProfile.LastLogin</dd>
                                 </dl>

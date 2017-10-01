@@ -10,16 +10,12 @@ namespace MyAspNetMvcApp.Areas.Account.Models
     {
         [Key]
         public string UserName { get; set; }
+        public string UserType { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
-        public string MobilePhone { get; set; }
-        public string AltEmail { get; set; }
-        public DateTime? LastLogin { get; set; }
         public DateTime? RegistrationDate { get; set; }
-        public bool? InActive { get; set; }
-
-        //Add your custom property here
-
+        public DateTime? LastLogin { get; set; }
+        public bool IsActive { get; set; }
     }
 
 

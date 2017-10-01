@@ -169,7 +169,7 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
             //await userManager.SetLockoutEnabledAsync(user.Id, true);
             //await userManager.SetLockoutEndDateAsync(user.Id, DateTime.Today.AddYears(10));
 
-            user.UserProfile.InActive = true;
+            user.UserProfile.IsActive = false;
             await userManager.UpdateAsync(user);
 
             TempData["Message"] = UserName + " has been deactivated.";
@@ -186,7 +186,7 @@ namespace MyAspNetMvcApp.Areas.Account.Controllers
             //await userManager.SetLockoutEnabledAsync(user.Id, false);
             //await userManager.SetLockoutEndDateAsync(user.Id, DateTime.Now);
 
-            user.UserProfile.InActive = false;
+            user.UserProfile.IsActive = true;
             await userManager.UpdateAsync(user);
 
             TempData["Message"] = UserName + " has been reactivated.";

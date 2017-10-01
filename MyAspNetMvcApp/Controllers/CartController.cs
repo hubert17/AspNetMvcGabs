@@ -39,6 +39,12 @@ namespace MyAspNetMvcApp.Controllers
             return View();
         }
 
+        public ActionResult Add()
+        {
+            return RedirectToAction("Index", "Products");
+        }
+
+        [Authorize]
         [HttpPost]
         public ActionResult Add(int productId, int quantity)
         {
